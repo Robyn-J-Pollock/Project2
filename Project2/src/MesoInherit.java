@@ -26,7 +26,7 @@ public class MesoInherit extends MesoAbstract {
 		char[] charArray = station.getSplitStId();
 		double dAvg = 0;
 		for (char x : charArray)
-			dAvg += (int)x;
+			dAvg += Integer.valueOf(x);
 		dAvg = dAvg/4.0;
 		int intAvg = (int) dAvg;
 		int[] intArray = new int[3];
@@ -52,6 +52,6 @@ public class MesoInherit extends MesoAbstract {
 	 */
 	@Override
 	public char letterAverage() {
-		return (char) calAverage()[2];
+		return Integer.toHexString(calAverage()[2]).charAt(0);
 	}
 }
