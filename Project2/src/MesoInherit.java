@@ -11,7 +11,7 @@ public class MesoInherit extends MesoAbstract {
 	 */
 	public MesoInherit(MesoStation station)
 	{
-		
+		this.station = station;
 	}
 	
 	/*
@@ -23,7 +23,28 @@ public class MesoInherit extends MesoAbstract {
 	 */
 	@Override
 	public int[] calAverage() {
-		return null;
+		char[] charArray = station.getSplitStId();
+		double dAvg = 0;
+		for (char x : charArray)
+			dAvg += (int)x;
+		dAvg = dAvg/4.0;
+		int intAvg = (int) dAvg;
+		int[] intArray = new int[3];
+		intArray[0] = intAvg;
+		if (dAvg/intAvg > 1)
+		{
+			intArray[1] = intAvg + 1;
+			if (dAvg - intAvg >= 0.5)
+				intArray[2] = intAvg + 1;
+			else
+				intArray[2] = intAvg;
+		}
+		else 
+		{
+			intArray[1] = intAvg;
+			intArray[2] = intAvg;
+		}
+		return intArray;
 	}
 	
 	/*
