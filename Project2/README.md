@@ -9,3 +9,4 @@ Task 7: Create JUnit classes
 Task 8: Finish JUnit test for MesoStation
 Task 9: Create Char Array in MesoStation
 Task 10: Finish class MesoInherit
+Task 11: Finish JUnit for MesoInherit
