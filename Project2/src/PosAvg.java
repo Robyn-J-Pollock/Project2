@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -16,10 +18,13 @@ public class PosAvg {
 	/*
 	 * Creates a new PosAvg object and stores stId.
 	 */
-	public PosAvg(String stId)
+	public PosAvg(String stId) throws IOException
 	{
-		aveStations = new String[4];
 		this.stId = stId;
+		aveStations = new String[4];
+		indexOfStation();
+		
+		
 	}
 	//TODO: Generate first two lines of the output related with the position/index
 	/*
@@ -29,16 +34,19 @@ public class PosAvg {
 	public int indexOfStation() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader("Mesonet.txt"));
 		int x = 1;
-		String line = br.readLine().split(" ")[0].trim();
-		br.mark(4);
+		String line = br.readLine();
+		line = line.trim();
+		line = line.split(" ")[0];
 		boolean match = false;
 		while (line != null && !match)
 		{
-			if (stId == line)
+			line = line.trim();
+			line = line.split(" ")[0];
+			if (stId.equals(line))
 				match = true;
 			else
 			{
-				line = br.readLine().split(" ")[0].trim();
+				line = br.readLine();
 				x++;
 			}
 		}
@@ -47,15 +55,16 @@ public class PosAvg {
 			if (x > 5 && x < 122)
 			{
 				position = x;
-				aveStations[2] = br.readLine().split(" ")[0].trim();
-				aveStations[3] = br.readLine().split(" ")[0].trim();
-				br.reset();
-				for (int i = 0; i < x - 3; x++)
-					br.readLine();
-				aveStations[0] = br.readLine().split(" ")[0].trim();
-				aveStations[1] = br.readLine().split(" ")[0].trim();
+				aveStations[2] = br.readLine().trim().split(" ")[0];
+				aveStations[3] = br.readLine().trim().split(" ")[0];
 				br.close();
-				return x;
+				br = new BufferedReader(new FileReader("Mesonet.txt"));
+				for (int i = 0; i < x - 3; i++)
+					br.readLine();
+				aveStations[0] = br.readLine().trim().split(" ")[0];
+				aveStations[1] = br.readLine().trim().split(" ")[0];
+				br.close();
+				return position;
 			}
 		}
 		else
@@ -79,6 +88,7 @@ public class PosAvg {
 	@Override
 	public String toString()
 	{
-		return String.format("This index is average of %s and %s, %s and %s, and so on.", aveStations[1], aveStations[2], aveStations[0], aveStations[3]);
+		String ofThis = String.format("This index is average of %s and %s, %s and %s, and so on.", aveStations[1], aveStations[2], aveStations[0], aveStations[3]);
+		return ofThis;
 	}
 }

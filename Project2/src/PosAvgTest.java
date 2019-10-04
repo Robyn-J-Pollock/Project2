@@ -1,12 +1,31 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PosAvgTest {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void indexOfStationTest() {
+		try {
+			PosAvg testPosAvg = new PosAvg("ALTU");
+			assertEquals(6, testPosAvg.indexOfStation());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
+	
+	@Test
+	public void toStringTest() {
+		try {
+			PosAvg testPosAvg = new PosAvg("ALTU");
+			String expected = "This index is average of ADAX and ALV2, ACME and ANT2, and so on.";
+			assertEquals(expected, testPosAvg);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 }
