@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+
 /**
  * @author Robyn Pollock
  * @version 2019-10-3
@@ -5,20 +10,63 @@
 public class PosAvg {
 	
 	private String stId;
+	private int position;
+	private String[] aveStations;
 	
 	/*
 	 * Creates a new PosAvg object and stores stId.
 	 */
 	public PosAvg(String stId)
 	{
-		
+		aveStations = new String[4];
+		this.stId = stId;
 	}
 	//TODO: Generate first two lines of the output related with the position/index
 	/*
-	 * Finds the position of the station in the Mesonet.txt
+	 * Finds and stores the position of the station in the Mesonet.txt
+	 * stores the data from N (+/-) 2 in array
 	 */
-	public int indexOfStation() {
-		return 0;
+	public int indexOfStation() throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader("Mesonet.txt"));
+		int x = 1;
+		String line = br.readLine().split(" ")[0].trim();
+		br.mark(4);
+		boolean match = false;
+		while (line != null && !match)
+		{
+			if (stId == line)
+				match = true;
+			else
+			{
+				line = br.readLine().split(" ")[0].trim();
+				x++;
+			}
+		}
+		if (match)
+		{
+			if (x > 5 && x < 122)
+			{
+				position = x;
+				aveStations[2] = br.readLine().split(" ")[0].trim();
+				aveStations[3] = br.readLine().split(" ")[0].trim();
+				br.reset();
+				for (int i = 0; i < x - 3; x++)
+					br.readLine();
+				aveStations[0] = br.readLine().split(" ")[0].trim();
+				aveStations[1] = br.readLine().split(" ")[0].trim();
+				br.close();
+				return x;
+			}
+		}
+		else
+		{
+			Arrays.fill(aveStations, null);
+			br.close();
+			return -1;
+		}
+		//java wanted me to :/
+		br.close();
+		return -1;
 	}
 	
 	/*
@@ -31,6 +79,6 @@ public class PosAvg {
 	@Override
 	public String toString()
 	{
-		return null;
+		return String.format("This index is average of %s and %s, %s and %s, and so on.", aveStations[1], aveStations[2], aveStations[0], aveStations[3]);
 	}
 }
