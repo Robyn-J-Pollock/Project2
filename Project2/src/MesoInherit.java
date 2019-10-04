@@ -1,3 +1,5 @@
+import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.IntegerConversion;
+
 /**
  * @author Robyn Pollock
  * @version 2019-10-3
@@ -52,6 +54,6 @@ public class MesoInherit extends MesoAbstract {
 	 */
 	@Override
 	public char letterAverage() {
-		return Integer.toString(calAverage()[2]).charAt(0);
+		return (char) calAverage()[2];
 	}
 }

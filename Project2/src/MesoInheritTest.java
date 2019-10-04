@@ -9,7 +9,6 @@ public class MesoInheritTest {
 		MesoInherit inherit = new MesoInherit(new MesoStation("AAAA"));
 		//A = 65
 		int[] results = inherit.calAverage();
-		System.out.println(results[1]);
 		for (int x : results)
 			assertEquals(65, x);
 		/*
@@ -31,6 +30,13 @@ public class MesoInheritTest {
 		assertEquals(65, results[0]);
 		assertEquals(66, results[1]);
 		assertEquals(65, results[2]);
+	}
+	
+	@Test
+	public void letterAverageTest()
+	{
+		MesoInherit inherit = new MesoInherit(new MesoStation("AAAA"));
+		assertEquals('A', inherit.letterAverage());
 	}
 
 }
