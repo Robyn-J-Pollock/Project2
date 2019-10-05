@@ -17,6 +17,7 @@ public class LetterAvg {
 	 */
 	public LetterAvg(char avg)
 	{
+		stations = new ArrayList<String>();
 		this.avg = avg;
 	}
 	
@@ -39,15 +40,16 @@ public class LetterAvg {
 				line = line.trim().split(" ")[0];
 				meSt = new MesoStation(line);
 				meIn = new MesoInherit(meSt);
-				if (meIn.calAverage()[2] == avg)
+				if (meIn.letterAverage() == avg)
 				{
 					stations.add(line);
 					count++;
 				}
 			}
-			br.readLine();
+			line = br.readLine();
 			x++;
 		}
+		br.close();
 		return count;
 	}
 	
