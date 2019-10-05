@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -14,16 +17,38 @@ public class LetterAvg {
 	 */
 	public LetterAvg(char avg)
 	{
-		
+		this.avg = avg;
 	}
 	
 	/*
 	 * Goes through Mesonet.txt and finds all stations with the same average
 	 * Stores their strings in stations and returns the number
 	 */
-	public int numberOfStationWithLetterAvg()
+	public int numberOfStationWithLetterAvg() throws IOException
 	{
-		return 0;
+		BufferedReader br = new BufferedReader(new FileReader("Mesonet.txt"));
+		String line = br.readLine();
+		int x = 1;
+		MesoStation meSt;
+		MesoInherit meIn;
+		int count = 0;
+		while(line != null)
+		{
+			if (x > 2)
+			{
+				line = line.trim().split(" ")[0];
+				meSt = new MesoStation(line);
+				meIn = new MesoInherit(meSt);
+				if (meIn.calAverage()[2] == avg)
+				{
+					stations.add(line);
+					count++;
+				}
+			}
+			br.readLine();
+			x++;
+		}
+		return count;
 	}
 	
 	/*
@@ -37,6 +62,9 @@ public class LetterAvg {
 	@Override
 	public String toString()
 	{
-		return null;
+		StringBuffer stBu = new StringBuffer("They are\n");
+		for (String strg : stations)
+			stBu.append(String.format("%s\n", strg));
+		return stBu.toString();
 	}
 }
