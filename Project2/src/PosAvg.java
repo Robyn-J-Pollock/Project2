@@ -64,7 +64,7 @@ public class PosAvg {
 				aveStations[0] = br.readLine().trim().split(" ")[0];
 				aveStations[1] = br.readLine().trim().split(" ")[0];
 				br.close();
-				return position;
+				return (position - 3);
 			}
 		}
 		else

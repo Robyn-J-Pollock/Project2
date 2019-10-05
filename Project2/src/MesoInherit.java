@@ -16,24 +16,24 @@ public class MesoInherit extends MesoAbstract {
 	
 	/*
 	 * Stores the ASCII average of the station,
-	 * with [0] being the floor,
-	 * [1] being the ceiling,
+	 * with [0] being the ceiling,
+	 * [1] being the floor,
 	 * and [2] being the average.
 	 * i.e. an average of 78.3 give [0] = 78, [1] = 79, [2] = 78
 	 */
 	@Override
 	public int[] calAverage() {
-		char[] charArray = station.getSplitStId();
+		char[] charArray = station.getStID().toCharArray();;
 		double dAvg = 0;
 		for (char x : charArray)
 			dAvg += Integer.valueOf(x);
 		dAvg = dAvg/4.0;
 		int intAvg = (int) dAvg;
 		int[] intArray = new int[3];
-		intArray[0] = intAvg;
+		intArray[1] = intAvg;
 		if (dAvg/intAvg > 1)
 		{
-			intArray[1] = intAvg + 1;
+			intArray[0] = intAvg + 1;
 			if (dAvg - intAvg >= 0.5)
 				intArray[2] = intAvg + 1;
 			else
@@ -41,7 +41,7 @@ public class MesoInherit extends MesoAbstract {
 		}
 		else 
 		{
-			intArray[1] = intAvg;
+			intArray[0] = intAvg;
 			intArray[2] = intAvg;
 		}
 		return intArray;

@@ -20,7 +20,7 @@ public class PosAvgTest {
 	public void toStringTest() {
 		try {
 			PosAvg testPosAvg = new PosAvg("ALTU");
-			String expected = "This index is average of ADAX and ALV2, ACME and ANT2, and so on.";
+			String expected = "This index is average of ADAX and ALV2, ACME and ANT2, and so on.\n";
 			assertEquals(expected, testPosAvg);
 		}
 		catch (Exception e) {

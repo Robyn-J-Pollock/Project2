@@ -1,15 +1,13 @@
+import java.io.IOException;
+
 /**
  * @author Mohammad Mukhtaruzzaman
  * @version 2019-09-18
 */
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Driver 
 {
-	public static void main(String[] args) throws IOException 
+	public static void main(String[] args) throws IOException
 	{
 		String stID = "OKCE";
 		MesoInherit mesoInherit = new MesoInherit(new MesoStation(stID));

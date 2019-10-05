@@ -15,32 +15,29 @@ public class LetterAvg {
 	/*
 	 * Creates new LetterAvg object and stores avg
 	 */
-	public LetterAvg(char avg)
+	public LetterAvg(char avg) throws IOException
 	{
 		stations = new ArrayList<String>();
 		this.avg = avg;
+		computeStations();
 	}
 	
 	/*
-	 * Goes through Mesonet.txt and finds all stations with the same average
+	 * Goes through Mesonet.txt and finds all stations with the same starting character
 	 * Stores their strings in stations and returns the number
 	 */
-	public int numberOfStationWithLetterAvg() throws IOException
+	private void computeStations() throws IOException
 	{
 		BufferedReader br = new BufferedReader(new FileReader("Mesonet.txt"));
 		String line = br.readLine();
 		int x = 1;
-		MesoStation meSt;
-		MesoInherit meIn;
 		int count = 0;
 		while(line != null)
 		{
 			if (x > 2)
 			{
 				line = line.trim().split(" ")[0];
-				meSt = new MesoStation(line);
-				meIn = new MesoInherit(meSt);
-				if (meIn.letterAverage() == avg)
+				if (line.charAt(0) == avg)
 				{
 					stations.add(line);
 					count++;
@@ -50,7 +47,15 @@ public class LetterAvg {
 			x++;
 		}
 		br.close();
-		return count;
+	}
+	
+	/*
+	 * returns number of stations with same letter average
+	 */
+	public int numberOfStationWithLetterAvg()
+	{
+		
+		return stations.size();
 	}
 	
 	/*
@@ -64,9 +69,9 @@ public class LetterAvg {
 	@Override
 	public String toString()
 	{
-		StringBuffer stBu = new StringBuffer("They are\n");
+		StringBuffer stBu = new StringBuffer("\nThey are:");
 		for (String strg : stations)
-			stBu.append(String.format("%s\n", strg));
+			stBu.append(String.format("\n%s", strg));
 		return stBu.toString();
 	}
 }
